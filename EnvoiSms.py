@@ -2,7 +2,7 @@
 # -*- coding:Utf-8 -*-
 
 import urllib, urllib2
-
+import libxml2
 
 class EnvoiSms(object):
 	'''
@@ -29,4 +29,14 @@ class EnvoiSms(object):
 		self.params['content'] = message
 		url = self.url_api + urllib.urlencode(self.params)
 		r = urllib2.urlopen(url)
+		doc = libxml2.parseDoc(r.read())
+		ctxt = doc.xpathNewContext()
+		res = ctxt.xpathEval("/response/status/status_code/text()")
+		return res[0]
+
+
+if __name__=="__main__":
+	e = EnvoiSms("81fc5dfb83d")
+	e.envoi("0","blabla")
+
 

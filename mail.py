@@ -46,8 +46,9 @@ class MailThread(TaskThread):
                 content_sms = { 'From' : email.utils.parseaddr(email_message['From']),
                 'Subject' :  email_message['Subject'],
                 'Content' : self.get_first_text_block(email_message)}
-                #self.api.envoi(self.numero, "Nouveau mail de " + content_sms['From'][0] + " : " + content_sms['Subject'])
-                print "mail !"
+                res = self.api.envoi(self.numero, "Nouveau mail de " + content_sms['From'][0] + " : " + content_sms['Subject'])
+                if (res!=200):
+                    print "erreur " + res
 
 
 class MailInstance(object):
