@@ -34,9 +34,3 @@ class EnvoiSms(object):
 		res = ctxt.xpathEval("/response/status/status_code/text()")
 		return res[0]
 
-
-if __name__=="__main__":
-	e = EnvoiSms("81fc5dfb83d")
-	e.envoi("0","blabla")
-
-
